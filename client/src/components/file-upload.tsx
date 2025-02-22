@@ -39,38 +39,36 @@ export function FileUpload({ onFilesSelected }: FileUploadProps) {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-4">
-        <Button
-          variant="outline"
-          onClick={() => document.getElementById("file-upload")?.click()}
-          className="gap-2"
-        >
-          <Upload className="h-4 w-4" />
-          Upload Files
-        </Button>
-        <input
-          id="file-upload"
-          type="file"
-          multiple
-          accept=".pdf,.doc,.docx,.txt"
-          className="hidden"
-          onChange={handleFileChange}
-        />
-      </div>
+      <Button
+        variant="outline"
+        onClick={() => document.getElementById("file-upload")?.click()}
+        className="gap-2 text-gray-300 border-gray-700 hover:bg-gray-800"
+      >
+        <Upload className="h-4 w-4" />
+        Upload Files
+      </Button>
+      <input
+        id="file-upload"
+        type="file"
+        multiple
+        accept=".pdf,.doc,.docx,.txt"
+        className="hidden"
+        onChange={handleFileChange}
+      />
 
       {selectedFiles.length > 0 && (
         <div className="space-y-2">
           {selectedFiles.map((file, index) => (
             <div
               key={index}
-              className="flex items-center justify-between p-2 bg-white/5 rounded-md"
+              className="flex items-center justify-between p-2 bg-gray-800/50 rounded-md border border-gray-700"
             >
               <span className="text-sm truncate text-gray-300">{file.name}</span>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => removeFile(index)}
-                className="text-gray-400 hover:text-white"
+                className="text-gray-400 hover:text-white hover:bg-gray-700"
               >
                 <X className="h-4 w-4" />
               </Button>
