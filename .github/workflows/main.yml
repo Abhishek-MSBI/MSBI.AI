@@ -1,0 +1,68 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Build application
+      run: npm run build
+
+    - name: Run type checks
+      run: tsc --noEmit
+
+    - name: Cache build artifacts
+      uses: actions/cache@v4
+      with:
+        path: |
+          dist
+          node_modules
+        key: ${{ runner.os }}-build-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-build-
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Restore cached build
+      uses: actions/cache@v4
+      with:
+        path: |
+          dist
+          node_modules
+        key: ${{ runner.os }}-build-${{ github.sha }}
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    # Add deployment steps here based on your hosting platform
+    # This is a placeholder for deployment configuration
+    - name: Deploy
+      run: |
+        echo "Add your deployment commands here"
+      env:
+        NODE_ENV: production
