@@ -1,3 +1,5 @@
+process.env.NODE_ENV = "production";
+
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
@@ -14,7 +16,7 @@ app.use((_req, res, next) => {
   next();
 });
 
-// Request logging middleware (original middleware retained)
+// Request logging middleware
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
@@ -60,11 +62,11 @@ const errorHandler = (err: any, _req: Request, res: Response, _next: NextFunctio
     // Add error handling middleware after routes
     app.use(errorHandler);
 
-    // Setup vite or serve static files based on environment
-    if (process.env.NODE_ENV === "development") {
-      await setupVite(app, server);
-    } else {
+    // In production, serve static files before setting up Vite
+    if (process.env.NODE_ENV === "production") {
       serveStatic(app);
+    } else {
+      await setupVite(app, server);
     }
 
     // Start server with proper options
@@ -74,16 +76,7 @@ const errorHandler = (err: any, _req: Request, res: Response, _next: NextFunctio
       host: "0.0.0.0",
       reusePort: true,
     }, () => {
-      log(`Server running on port ${port}`);
-    });
-
-    // Handle server errors
-    server.on('error', (error: NodeJS.ErrnoException) => {
-      console.error('Server error:', error);
-      if (error.code === 'EADDRINUSE') {
-        log(`Port ${port} is already in use`);
-        process.exit(1);
-      }
+      log(`Server running on port ${port} in ${process.env.NODE_ENV} mode`);
     });
 
   } catch (error) {
