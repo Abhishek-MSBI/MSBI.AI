@@ -38,11 +38,11 @@ export function FileUpload({ onFilesSelected }: FileUploadProps) {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="pt-4 border-t border-gray-800">
       <Button
         variant="outline"
         onClick={() => document.getElementById("file-upload")?.click()}
-        className="gap-2 text-gray-300 border-gray-700 hover:bg-gray-800"
+        className="gap-2 text-gray-400 border-gray-800 hover:text-gray-200 hover:bg-gray-900/50 hover:border-gray-700 transition-colors"
       >
         <Upload className="h-4 w-4" />
         Upload Files
@@ -57,18 +57,18 @@ export function FileUpload({ onFilesSelected }: FileUploadProps) {
       />
 
       {selectedFiles.length > 0 && (
-        <div className="space-y-2">
+        <div className="space-y-2 mt-4">
           {selectedFiles.map((file, index) => (
             <div
               key={index}
-              className="flex items-center justify-between p-2 bg-gray-800/50 rounded-md border border-gray-700"
+              className="flex items-center justify-between p-2 bg-gray-900/50 rounded-md border border-gray-800"
             >
-              <span className="text-sm truncate text-gray-300">{file.name}</span>
+              <span className="text-sm truncate text-gray-400">{file.name}</span>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => removeFile(index)}
-                className="text-gray-400 hover:text-white hover:bg-gray-700"
+                className="text-gray-500 hover:text-gray-300 hover:bg-gray-800/50"
               >
                 <X className="h-4 w-4" />
               </Button>

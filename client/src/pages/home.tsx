@@ -33,11 +33,11 @@ export default function Home() {
   });
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      <header className="py-12 border-b border-white/10">
+    <div className="min-h-screen bg-black">
+      <header className="py-12 border-b border-gray-800">
         <div className="container max-w-3xl mx-auto px-4">
-          <h1 className="text-4xl font-bold mb-4">MSBI.AI</h1>
-          <p className="text-lg text-gray-300">
+          <h1 className="text-4xl font-bold mb-4 text-white">MSBI.AI</h1>
+          <p className="text-lg text-gray-400">
             Your specialized AI research assistant for biological sciences and bioinformatics. 
             Get detailed, academic-style answers to your research questions, analyze scientific papers, 
             and explore complex biological concepts.
@@ -45,8 +45,8 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="container max-w-3xl mx-auto py-8 px-4 space-y-8">
-        <div className="space-y-6">
+      <main className="container max-w-3xl mx-auto py-8 px-4">
+        <div className="bg-gray-900/30 p-6 rounded-lg border border-gray-800">
           <SearchBox
             onSubmit={(question) => mutation.mutate(question)}
             isLoading={mutation.isPending}

@@ -28,7 +28,7 @@ export function SearchBox({ onSubmit, isLoading }: SearchBoxProps) {
                 <FormControl>
                   <Textarea
                     placeholder="Ask any biological or bioinformatics question..."
-                    className="min-h-[100px] text-lg"
+                    className="min-h-[100px] text-lg bg-black/50 border-gray-800 text-gray-200 placeholder:text-gray-500 focus:border-gray-700 focus:ring-gray-700"
                     {...field}
                   />
                 </FormControl>
@@ -37,7 +37,7 @@ export function SearchBox({ onSubmit, isLoading }: SearchBoxProps) {
           />
           <Button 
             type="submit" 
-            className="w-full md:w-auto" 
+            className="w-full md:w-auto bg-gray-800 text-gray-200 hover:bg-gray-700 transition-colors" 
             disabled={isLoading}
           >
             <Search className="mr-2 h-4 w-4" />
