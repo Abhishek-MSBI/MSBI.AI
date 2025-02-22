@@ -2,7 +2,7 @@
 
 An AI-powered research assistant platform designed specifically for biological sciences, streamlining scientific document analysis and knowledge extraction through advanced computational tools.
 
-## Features
+## 🌟 Features
 
 - 🧬 Specialized in biological sciences and bioinformatics
 - 📝 Advanced file processing for scientific documents
@@ -11,26 +11,15 @@ An AI-powered research assistant platform designed specifically for biological s
 - 📱 Responsive web application design
 - 📤 Robust file upload capabilities
 
-## Prerequisites
+## 🚀 Quick Start
 
-Before you begin, ensure you have installed:
+### Prerequisites
+
+Before you begin, ensure you have:
 - Node.js (v20.x or later)
 - npm (v9.x or later)
 
-## Environment Variables
-
-Create a `.env` file in the root directory with the following variables:
-
-```env
-# Required for AI functionality
-OPENAI_API_KEY=your_openai_api_key
-PALM_API_KEY=your_palm_api_key
-
-# Optional for production deployment
-NODE_ENV=production
-```
-
-## Installation
+### Installation
 
 1. Clone the repository:
 ```bash
@@ -43,20 +32,22 @@ cd msbi-ai
 npm install
 ```
 
-3. Start the development server:
+3. Set up environment variables:
+```bash
+cp .env.example .env
+```
+Edit `.env` and add your API keys:
+- Get your OpenAI API key from [OpenAI Platform](https://platform.openai.com/api-keys)
+- Get your PaLM API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
+
+4. Start the development server:
 ```bash
 npm run dev
 ```
 
-The application will be available at `http://localhost:5000`
+The application will be available at `http://localhost:3000`
 
-## Development
-
-- Frontend code is in the `client/src` directory
-- Backend API routes are in `server/routes.ts`
-- Shared types and schemas are in `shared/schema.ts`
-
-## Building for Production
+## 📦 Building for Production
 
 1. Build the application:
 ```bash
@@ -68,7 +59,18 @@ npm run build
 npm start
 ```
 
-## API Documentation
+## 🔧 Environment Variables
+
+Required environment variables:
+- `OPENAI_API_KEY`: Your OpenAI API key
+- `PALM_API_KEY`: Your PaLM API key
+
+Optional variables:
+- `PORT`: Server port (default: 3000)
+- `NODE_ENV`: Environment mode (development/production)
+- `DATABASE_URL`: PostgreSQL database URL (if using database)
+
+## 🌐 API Documentation
 
 ### POST /api/query
 Submit a research question with optional file attachments.
@@ -92,7 +94,20 @@ Response:
 }
 ```
 
-## Contributing
+## 🛠️ Tech Stack
+
+- Frontend:
+  - React with TypeScript
+  - TanStack Query for data fetching
+  - Tailwind CSS & shadcn/ui for styling
+  - Wouter for routing
+- Backend:
+  - Express.js
+  - OpenAI API
+  - PaLM API
+  - Drizzle ORM (optional)
+
+## 🤝 Contributing
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
@@ -100,6 +115,6 @@ Response:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

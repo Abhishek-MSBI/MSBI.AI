@@ -44,3 +44,8 @@ vite.config.ts.*
 # Temporary files
 .temp
 .cache
+
+# Replit specific
+.replit
+replit.nix
+.config
