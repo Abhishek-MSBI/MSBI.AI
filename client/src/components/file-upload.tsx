@@ -10,13 +10,22 @@ export function FileUpload({ onFilesSelected }: FileUploadProps) {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || []);
+    if (!e.target.files?.length) return;
+
+    const files = Array.from(e.target.files);
     setSelectedFiles(files);
 
-    const fileContents = await Promise.all(
-      files.map((file) => file.text())
-    );
-    onFilesSelected(fileContents);
+    try {
+      const fileContents = await Promise.all(
+        files.map(async (file) => {
+          const text = await file.text();
+          return text;
+        })
+      );
+      onFilesSelected(fileContents);
+    } catch (error) {
+      console.error("Error reading files:", error);
+    }
   };
 
   const removeFile = (index: number) => {
@@ -25,6 +34,7 @@ export function FileUpload({ onFilesSelected }: FileUploadProps) {
       newFiles.splice(index, 1);
       return newFiles;
     });
+    onFilesSelected([]);
   };
 
   return (
@@ -47,19 +57,20 @@ export function FileUpload({ onFilesSelected }: FileUploadProps) {
           onChange={handleFileChange}
         />
       </div>
-      
+
       {selectedFiles.length > 0 && (
         <div className="space-y-2">
           {selectedFiles.map((file, index) => (
             <div
               key={index}
-              className="flex items-center justify-between p-2 bg-muted rounded-md"
+              className="flex items-center justify-between p-2 bg-white/5 rounded-md"
             >
-              <span className="text-sm truncate">{file.name}</span>
+              <span className="text-sm truncate text-gray-300">{file.name}</span>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => removeFile(index)}
+                className="text-gray-400 hover:text-white"
               >
                 <X className="h-4 w-4" />
               </Button>

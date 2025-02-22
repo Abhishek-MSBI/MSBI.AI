@@ -33,37 +33,20 @@ export default function Home() {
   });
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="bg-primary py-8">
-        <div className="container">
-          <h1 className="text-4xl font-bold text-primary-foreground mb-2">
-            MSBI.AI
-          </h1>
-          <p className="text-lg text-primary-foreground/80">
-            Your AI Research Assistant for Biological Sciences
+    <div className="min-h-screen bg-black text-white">
+      <header className="py-12 border-b border-white/10">
+        <div className="container max-w-3xl mx-auto px-4">
+          <h1 className="text-4xl font-bold mb-4">MSBI.AI</h1>
+          <p className="text-lg text-gray-300">
+            Your specialized AI research assistant for biological sciences and bioinformatics. 
+            Get detailed, academic-style answers to your research questions, analyze scientific papers, 
+            and explore complex biological concepts.
           </p>
         </div>
       </header>
 
-      <main className="container py-8 space-y-8">
-        <div className="grid md:grid-cols-2 gap-8">
-          <div>
-            <img
-              src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69"
-              alt="Laboratory"
-              className="rounded-lg object-cover aspect-video"
-            />
-          </div>
-          <div>
-            <img
-              src="https://images.unsplash.com/photo-1579154392128-bf8c7ebee541"
-              alt="DNA Structure"
-              className="rounded-lg object-cover aspect-video"
-            />
-          </div>
-        </div>
-
-        <div className="max-w-3xl mx-auto space-y-6">
+      <main className="container max-w-3xl mx-auto py-8 px-4 space-y-8">
+        <div className="space-y-6">
           <SearchBox
             onSubmit={(question) => mutation.mutate(question)}
             isLoading={mutation.isPending}
